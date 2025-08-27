@@ -176,15 +176,6 @@ const NavBar = () => {
                                         </NavLink>
                                     </li>
                                     <li>
-                                        <NavLink
-                                            to="dashboard/myProfile"
-                                            className="block px-4 py-2 hover:bg-[#5e00a8] hover:text-white transition-colors duration-200"
-                                            onClick={() => setDropdownOpen(false)}
-                                        >
-                                            Dashboard
-                                        </NavLink>
-                                    </li>
-                                    <li>
                                         <button
                                             onClick={handleLogOut}
                                             className="w-full text-left px-4 py-2 hover:bg-red-600 hover:text-white transition-colors duration-200"
