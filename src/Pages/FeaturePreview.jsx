@@ -32,7 +32,7 @@ const features = [
 
 const FeaturePreview = () => {
   return (
-    <section id="features" className="py-20 px-6 md:px-16 bg-gray-50 lg:mx-10 lg:my-10 rounded-2xl shadow-lg">
+    <section id="features" className="py-20 px-6 md:px-16 bg-gradient-to-br from-blue-50 to-indigo-100 lg:mx-10 lg:my-10 rounded-2xl shadow-lg">
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-5xl font-bold text-gray-800 mb-4">
           Explore Our Features 

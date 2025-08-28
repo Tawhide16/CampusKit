@@ -1,9 +1,12 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaHome, FaUserAlt } from 'react-icons/fa';
-import { MdOutlineKingBed, MdBookmark, MdPermContactCalendar, MdSchool, MdQuiz } from 'react-icons/md';
-import { BsSun, BsMoon } from 'react-icons/bs';
+import { FaHome } from 'react-icons/fa';
+import { MdOutlineKingBed, MdBookmark, MdPermContactCalendar, MdSchool } from 'react-icons/md';
 import { AuthContext } from '../Provider/AuthProvider';
+import { SiPivotaltracker } from "react-icons/si";
+import { Link } from 'react-router-dom';
+import { FcPlanner } from 'react-icons/fc';
+
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -11,26 +14,35 @@ const NavBar = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef();
 
+    // Theme toggle
     const toggleTheme = () => {
-        const newTheme = theme === 'dark' ? 'light' : 'dark';
-        setTheme(newTheme);
-        localStorage.setItem('theme', newTheme);
+        setTheme(theme === "dark" ? "light" : "dark");
+        localStorage.setItem("theme", theme === "dark" ? "light" : "dark");
     };
 
+
+    // Load saved theme
     useEffect(() => {
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) setTheme(savedTheme);
-        else {
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             setTheme(prefersDark ? 'dark' : 'light');
         }
     }, []);
 
+    // Apply theme to <html>
     useEffect(() => {
-        document.body.classList.remove('light', 'dark');
-        document.body.classList.add(theme);
+        const root = document.documentElement; // <-- html element
+        if (theme === "dark") {
+            root.classList.add("dark");
+        } else {
+            root.classList.remove("dark");
+        }
     }, [theme]);
 
+    // Handle click outside for dropdown
     useEffect(() => {
         const handleClickOutside = (e) => {
             if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -72,7 +84,7 @@ const NavBar = () => {
                             : 'hover:text-[#7700cf] flex items-center gap-1'
                     }
                 >
-                    <MdOutlineKingBed /> Class Tracker
+                    <SiPivotaltracker /> Class Tracker
                 </NavLink>
             </li>
 
@@ -111,7 +123,7 @@ const NavBar = () => {
                             : 'hover:text-[#7700cf] flex items-center gap-1'
                     }
                 >
-                    <MdSchool /> Study Planner
+                    <FcPlanner /> Study Planner
                 </NavLink>
             </li>
         </>
@@ -119,7 +131,7 @@ const NavBar = () => {
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 shadow-md">
-            <div className="mx-auto px-4 sm:px-6 lg:px-15 flex items-center justify-between h-16">
+            <div className="mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between h-16">
                 {/* Logo + Website name */}
                 <NavLink
                     to="/"
@@ -131,12 +143,16 @@ const NavBar = () => {
                     </span>
                 </NavLink>
 
-                {/* Menu - Desktop */}
-                <ul className="hidden md:flex space-x-8 text-gray-700 dark:text-gray-300">{Links}</ul>
+                {/* Desktop Menu */}
+                <ul className="hidden md:flex space-x-8 text-gray-700 dark:text-gray-300">
+                    {Links}
+                </ul>
+
+                {/* Right side buttons */}
 
                 <div className="flex items-center gap-4">
                     {/* Dark mode toggle */}
-                    <div className="flex items-center gap-2">
+                    {/* <div className="flex items-center gap-2">
                         <span className="text-gray-600 dark:text-gray-300">🌞</span>
                         <input
                             type="checkbox"
@@ -145,7 +161,7 @@ const NavBar = () => {
                             onChange={toggleTheme}
                         />
                         <span className="text-gray-600 dark:text-gray-300">🌙</span>
-                    </div>
+                    </div> */}
 
                     {/* Auth buttons / User profile */}
                     {user ? (
@@ -163,17 +179,9 @@ const NavBar = () => {
                             </button>
 
                             {dropdownOpen && (
-                                <ul className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-2 text-gray-700 dark:text-gray-200 text-sm">
+                                <ul className="absolute right-0 mt-2 w-48 bg-gray-100 dark:bg-gray-800 rounded-md shadow-lg py-2 text-gray-700 dark:text-gray-200 text-sm">
                                     <li className="px-4 py-2 cursor-default font-semibold border-b border-gray-200 dark:border-gray-700 truncate">
                                         {user.displayName || 'No Name'}
-                                    </li>
-                                    <li>
-                                        <NavLink
-                                            to="myProfile"
-                                            className="block px-4 py-2 hover:bg-[#7700cf] hover:text-white transition-colors duration-200"
-                                        >
-                                            My-Profile
-                                        </NavLink>
                                     </li>
                                     <li>
                                         <button
@@ -182,6 +190,17 @@ const NavBar = () => {
                                         >
                                             Logout
                                         </button>
+                                    </li>
+                                    <li>
+                                        <li>
+                                            <Link
+                                                to="/myProfile"
+                                                className="block w-full text-left px-4 py-2 hover:bg-[#7700cf] hover:text-white transition-colors duration-200"
+                                            >
+                                                My Profile
+                                            </Link>
+                                        </li>
+
                                     </li>
                                 </ul>
                             )}
@@ -195,7 +214,7 @@ const NavBar = () => {
                         </NavLink>
                     )}
 
-                    {/* Mobile menu button */}
+                    {/* Mobile menu */}
                     <MobileMenuLinks Links={Links} />
                 </div>
             </div>

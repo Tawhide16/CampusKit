@@ -318,7 +318,7 @@ const BudgetTracker = () => {
       <motion.h1 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-3xl font-bold text-center mb-6 text-indigo-800 flex items-center justify-center"
+        className="text-3xl font-bold text-center mb-6 text-[#7700cf] flex items-center justify-center"
       >
         <FaWallet className="mr-2" /> Budget Tracker
       </motion.h1>
@@ -349,7 +349,7 @@ const BudgetTracker = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white p-4 rounded-xl shadow-md border-l-4 border-indigo-500"
+          className="bg-white p-4 rounded-xl shadow-md border-l-4 border-[#7700cf]"
         >
           <h3 className="text-lg font-semibold text-gray-700">Balance</h3>
           <p className={`text-2xl font-bold ${balance >= 0 ? 'text-green-600' : 'text-red-600'}`}>
@@ -368,7 +368,7 @@ const BudgetTracker = () => {
             transition={{ delay: 0.4 }}
             className="bg-white p-4 rounded-xl shadow-md"
           >
-            <h2 className="text-xl font-semibold mb-3 text-indigo-700 flex items-center">
+            <h2 className="text-xl font-semibold mb-3 text-[#7700cf] flex items-center">
               <FaPlus className="mr-2" /> {editId ? "Edit Transaction" : "Add Transaction"}
             </h2>
             <form onSubmit={handleSubmit} className="space-y-3">
@@ -442,7 +442,7 @@ const BudgetTracker = () => {
               
               <button
                 type="submit"
-                className="w-full bg-indigo-600 text-white p-3 rounded-lg hover:bg-indigo-700 transition-colors shadow-md"
+                className="w-full bg-[#7700cf] hover:bg-[#5e00a8] text-white p-3 rounded-lg  transition-colors shadow-md"
               >
                 {editId ? "Update Transaction" : "Add Transaction"}
               </button>
@@ -472,7 +472,7 @@ const BudgetTracker = () => {
             transition={{ delay: 0.5 }}
             className="bg-white p-4 rounded-xl shadow-md"
           >
-            <h2 className="text-xl font-semibold mb-3 text-indigo-700 flex items-center">
+            <h2 className="text-xl font-semibold mb-3 text-[#7700cf] flex items-center">
               <FaPiggyBank className="mr-2" /> Manage Categories
             </h2>
             
@@ -494,7 +494,7 @@ const BudgetTracker = () => {
               </select>
               <button
                 onClick={addCategory}
-                className="bg-indigo-600 text-white p-2 rounded-lg hover:bg-indigo-700"
+                className="bg-[#7700cf] hover:bg-[#5e00a8] text-white p-2 rounded-lg "
               >
                 <FaPlus />
               </button>
@@ -535,7 +535,7 @@ const BudgetTracker = () => {
             className="bg-white p-4 rounded-xl shadow-md"
           >
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold text-indigo-700 flex items-center">
+              <h2 className="text-xl font-semibold text-[#7700cf] flex items-center">
                 <FaChartLine className="mr-2" /> Financial Overview
               </h2>
               
@@ -554,13 +554,13 @@ const BudgetTracker = () => {
                 <div className="flex bg-gray-200 rounded-lg p-1">
                   <button
                     onClick={() => setActiveChart("bar")}
-                    className={`px-3 py-1 rounded ${activeChart === "bar" ? "bg-indigo-600 text-white" : ""}`}
+                    className={`px-3 py-1 rounded ${activeChart === "bar" ? "bg-[#7700cf] text-white" : ""}`}
                   >
                     Bar
                   </button>
                   <button
                     onClick={() => setActiveChart("pie")}
-                    className={`px-3 py-1 rounded ${activeChart === "pie" ? "bg-indigo-600 text-white" : ""}`}
+                    className={`px-3 py-1 rounded ${activeChart === "pie" ? "bg-[#7700cf] text-white" : ""}`}
                   >
                     Pie
                   </button>
@@ -584,7 +584,7 @@ const BudgetTracker = () => {
             transition={{ delay: 0.5 }}
             className="bg-white p-4 rounded-xl shadow-md"
           >
-            <h2 className="text-xl font-semibold mb-3 text-indigo-700">Recent Transactions</h2>
+            <h2 className="text-xl font-semibold mb-3 text-[#7700cf]">Recent Transactions</h2>
             
             <div className="overflow-y-auto max-h-80">
               <AnimatePresence>
@@ -621,7 +621,7 @@ const BudgetTracker = () => {
                           
                           <button
                             onClick={() => handleEdit(transaction)}
-                            className="text-indigo-500 hover:text-indigo-700"
+                            className="text-[#7700cf] hover:text-[#7700cf]"
                           >
                             <FaEdit />
                           </button>

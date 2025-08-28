@@ -2,7 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../Firebase/firebase.config";
 import { AuthContext } from "../Provider/AuthProvider";
-import { FaUser, FaEnvelope, FaSpinner } from "react-icons/fa";
+import { FaEnvelope, FaSpinner } from "react-icons/fa";
+import NavBar from "../Components/NavBar";
 
 const MyProfile = () => {
   const { user } = useContext(AuthContext);
@@ -10,7 +11,10 @@ const MyProfile = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!user?.uid) return;
+    if (!user?.uid) {
+      setLoading(false);
+      return;
+    }
 
     const fetchUser = async () => {
       try {
@@ -19,8 +23,6 @@ const MyProfile = () => {
 
         if (docSnap.exists()) {
           setUserData(docSnap.data());
-        } else {
-          console.log("No such document!");
         }
       } catch (err) {
         console.error("Error fetching user:", err);
@@ -32,22 +34,35 @@ const MyProfile = () => {
     fetchUser();
   }, [user]);
 
-  if (loading) return <FaSpinner className="animate-spin text-4xl mx-auto mt-20" />;
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <FaSpinner className="animate-spin text-4xl" />
+      </div>
+    );
 
-  if (!userData) return <p className="text-center mt-20">User data not found.</p>;
+  if (!user) return <p className="text-center mt-20">Please log in to see your profile.</p>;
+
+  // Auth user as fallback if Firestore doc missing
+  const profilePic = userData?.photoURL || user.photoURL || "https://via.placeholder.com/150";
+  const displayName = userData?.displayName || user.displayName || "No Name";
+  const email = userData?.email || user.email || "No Email";
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 border rounded-lg shadow-lg">
-      <img
-        src={userData.photoURL || "https://via.placeholder.com/150"}
-        alt="Profile"
-        className="w-32 h-32 rounded-full mx-auto mb-4"
-      />
-      <h2 className="text-xl font-semibold text-center">{userData.displayName || "No Name"}</h2>
-      <p className="text-center text-gray-600 mb-2">
-        <FaEnvelope className="inline mr-2" /> {userData.email}
-      </p>
-    </div>
+    <>
+      <NavBar />
+      <div className="max-w-md mx-auto  p-6 border rounded-lg shadow-lg mt-25">
+        <img
+          src={profilePic}
+          alt={displayName}
+          className="w-32 h-32 rounded-full mx-auto mb-4"
+        />
+        <h2 className="text-xl font-semibold text-center">{displayName}</h2>
+        <p className="text-center text-gray-600 mb-2">
+          <FaEnvelope className="inline mr-2" /> {email}
+        </p>
+      </div>
+    </>
   );
 };
 

@@ -12,7 +12,7 @@ const points = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-20 px-6 md:px-16 bg-white">
+    <section className="py-20 px-6 md:px-16 bg-gradient-to-br from-blue-50 to-indigo-100 lg:mx-10 lg:my-10 rounded-2xl shadow-lg  ">
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-5xl font-bold text-gray-800 mb-4">
           Why Choose Us? 💡

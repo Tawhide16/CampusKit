@@ -120,7 +120,7 @@ const ClassTracker = () => {
       <motion.h1 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-3xl font-bold text-center mb-6 text-indigo-800 flex items-center justify-center"
+        className="text-3xl font-bold text-center mb-6 text-[#7700cf] flex items-center justify-center"
       >
         <span className="mr-2">📅</span> Class Schedule Tracker
       </motion.h1>
@@ -154,7 +154,7 @@ const ClassTracker = () => {
             onClick={() => setFilter("all")}
             className={`flex-1 py-2 rounded-lg ${
               filter === "all"
-                ? "bg-indigo-600 text-white"
+                ? "bg-[#7700cf] hover:bg-[#5e00a8] text-white"
                 : "bg-gray-200 text-gray-700"
             }`}
           >
@@ -164,7 +164,7 @@ const ClassTracker = () => {
             onClick={() => setFilter("upcoming")}
             className={`flex-1 py-2 rounded-lg ${
               filter === "upcoming"
-                ? "bg-indigo-600 text-white"
+                ? "bg-[#7700cf] hover:bg-[#5e00a8] text-white"
                 : "bg-gray-200 text-gray-700"
             }`}
           >
@@ -181,7 +181,7 @@ const ClassTracker = () => {
         onSubmit={handleSubmit}
         className="bg-white p-4 rounded-xl shadow-md mb-6"
       >
-        <h2 className="text-xl font-semibold mb-3 text-indigo-700">
+        <h2 className="text-xl font-semibold mb-3 text-[#7700cf]">
           {editIndex !== null ? "Edit Class" : "Add New Class"}
         </h2>
         <div className="space-y-3">
@@ -203,7 +203,7 @@ const ClassTracker = () => {
           </div>
           <button
             type="submit"
-            className="w-full flex items-center justify-center gap-2 bg-indigo-600 text-white p-3 rounded-lg hover:bg-indigo-700 transition-colors shadow-md"
+            className="w-full flex items-center justify-center gap-2 bg-[#7700cf] hover:bg-[#5e00a8] text-white p-3 rounded-lg  transition-colors shadow-md"
           >
             <FaPlus /> {editIndex !== null ? "Update Class" : "Add Class"}
           </button>
@@ -225,7 +225,7 @@ const ClassTracker = () => {
 
       {/* Class List */}
       <div className="mb-6">
-        <h2 className="text-xl font-semibold mb-3 text-indigo-700">
+        <h2 className="text-xl font-semibold mb-3 text-[#7700cf]">
           Your Classes ({filteredSchedules.length})
         </h2>
         
@@ -251,11 +251,11 @@ const ClassTracker = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white shadow-md rounded-xl p-4 mb-3 border-l-4 border-indigo-500"
+                className="bg-white shadow-md rounded-xl p-4 mb-3 border-l-4 border-[#7700cf]"
               >
                 <div className="flex justify-between items-start">
                   <div className="flex-1">
-                    <h3 className="font-semibold text-lg text-indigo-800">
+                    <h3 className="font-semibold text-lg text-[#7700cf]">
                       {item.className}
                     </h3>
                     <div className="flex items-center mt-1 text-gray-600">
@@ -270,7 +270,7 @@ const ClassTracker = () => {
                           s.className === item.className && s.time === item.time
                         )
                       )}
-                      className="p-2 text-indigo-600 hover:bg-indigo-100 rounded-full transition-colors"
+                      className="p-2 text-[#7700cf] hover:bg-indigo-100 rounded-full transition-colors"
                       aria-label="Edit"
                     >
                       <FaEdit />
