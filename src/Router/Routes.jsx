@@ -9,6 +9,7 @@ import ExamQAGenerator from "../Pages/ExamQAGenerator.jsx";
 import StudyPlanner from "../Pages/StudyPlanner.jsx";
 import Dashboard from "../Pages/Dashboard.jsx";
 import MyProfile from "../Pages/MyProfile.jsx";
+import PrivetRouter from "../Provider/PrivateRoute.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -29,19 +30,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "class-tracker",
-        Component: ClassTracker
+        element:<PrivetRouter><ClassTracker/></PrivetRouter>
       },
       {
         path: "budget-tracker",
-        Component: BudgetTracker
+        element:<PrivetRouter><BudgetTracker/></PrivetRouter>
       },
       {
         path: "exam-qa",
-        Component: ExamQAGenerator
+        element:<PrivetRouter><ExamQAGenerator/></PrivetRouter>
       },
       {
         path: "study-planner",
-        Component: StudyPlanner
+        element:<PrivetRouter><StudyPlanner/></PrivetRouter>
       },
     ]
   },
